@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mongo
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
